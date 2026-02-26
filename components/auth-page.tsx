@@ -110,12 +110,12 @@ export function AuthPage({ onLogin }: AuthPageProps) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background p-4">
       <div className="w-full max-w-5xl">
-        <div className="grid gap-0 overflow-hidden rounded-2xl border border-border shadow-2xl lg:grid-cols-5">
+        <div className="grid gap-0 overflow-hidden rounded-2xl border border-border shadow-xl dark:shadow-2xl lg:grid-cols-5">
           {/* Left Panel - Branding */}
-          <div className="relative flex flex-col items-center justify-center bg-card p-8 lg:col-span-2 lg:p-10">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
+          <div className="relative flex flex-col items-center justify-center bg-secondary p-8 dark:bg-card lg:col-span-2 lg:p-10">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/15 via-transparent to-transparent dark:from-primary/10" />
             <div className="relative z-10 flex flex-col items-center text-center">
-              <div className="mb-6 flex size-20 items-center justify-center overflow-hidden rounded-2xl border border-primary/20 bg-primary/10 shadow-lg shadow-primary/5">
+              <div className="mb-6 flex size-20 items-center justify-center overflow-hidden rounded-2xl border border-primary/20 bg-card shadow-lg shadow-primary/10 dark:bg-primary/10 dark:shadow-primary/5">
                 <Image
                   src="/images/logo.jpg"
                   alt="GrowthBuddy Logo"
@@ -179,7 +179,7 @@ export function AuthPage({ onLogin }: AuthPageProps) {
           </div>
 
           {/* Right Panel - Form */}
-          <div className="flex flex-col justify-center bg-background p-6 lg:col-span-3 lg:p-10">
+          <div className="flex flex-col justify-center bg-card p-6 dark:bg-background lg:col-span-3 lg:p-10">
             <div className="mx-auto w-full max-w-sm">
               {/* Account Type Toggle */}
               <div className="mb-6 flex rounded-xl border border-border bg-card p-1">

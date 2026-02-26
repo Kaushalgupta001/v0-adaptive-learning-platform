@@ -401,7 +401,7 @@ function StatCard({
   accentColor: string
 }) {
   return (
-    <Card className="border-border bg-card group hover:border-primary/30 transition-all duration-300">
+    <Card className="border-border bg-card shadow-sm group hover:border-primary/30 hover:shadow-md transition-all duration-300 dark:shadow-none dark:hover:shadow-none">
       <CardContent className="p-3 sm:p-4">
         <div className="flex items-center justify-between">
           <span className="text-[10px] font-medium text-muted-foreground sm:text-xs">{title}</span>

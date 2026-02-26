@@ -75,8 +75,8 @@ export function AppShell({ children, activeTab, onTabChange, unreadNudges, userN
         )}>
           {/* Logo */}
           <div className="flex h-16 items-center gap-3 border-b border-border px-4">
-            <div className="flex size-9 items-center justify-center overflow-hidden rounded-lg">
-              <Image src="/images/logo.jpg" alt="GrowthBuddy" width={36} height={36} className="rounded-lg object-cover" />
+            <div className="flex size-9 items-center justify-center overflow-hidden rounded-xl bg-card shadow-sm ring-1 ring-border dark:bg-transparent dark:shadow-none dark:ring-0">
+              <Image src="/images/logo.jpg" alt="GrowthBuddy" width={36} height={36} className="rounded-xl object-cover" />
             </div>
             {!collapsed && (
               <div className="flex flex-col">
@@ -193,7 +193,7 @@ export function AppShell({ children, activeTab, onTabChange, unreadNudges, userN
         {/* Main */}
         <div className={cn("flex flex-1 flex-col transition-all duration-300", collapsed ? "lg:ml-[68px]" : "lg:ml-[260px]")}>
           {/* Top Bar */}
-          <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-border bg-background/80 px-4 backdrop-blur-xl lg:h-16 lg:px-6">
+          <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-border bg-background/90 px-4 shadow-sm backdrop-blur-xl dark:bg-background/80 dark:shadow-none lg:h-16 lg:px-6">
             <button onClick={() => setMobileOpen(true)} className="flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent lg:hidden">
               <Menu className="size-5" />
             </button>

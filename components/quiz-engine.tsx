@@ -272,11 +272,11 @@ export function QuizEngine() {
 
 function QuizMenu({ onStart }: { onStart: (subject: string | null) => void }) {
   const subjectList = [
-    { name: "Mathematics", questions: 3, color: "text-primary", bg: "bg-primary/10" },
-    { name: "Physics", questions: 3, color: "text-info", bg: "bg-info/10" },
-    { name: "Chemistry", questions: 1, color: "text-warning", bg: "bg-warning/10" },
-    { name: "Biology", questions: 1, color: "text-success", bg: "bg-success/10" },
-    { name: "Computer Science", questions: 2, color: "text-info", bg: "bg-info/10" },
+    { name: "Mathematics", questions: 6, color: "text-primary", bg: "bg-primary/10" },
+    { name: "Physics", questions: 5, color: "text-info", bg: "bg-info/10" },
+    { name: "Chemistry", questions: 4, color: "text-warning", bg: "bg-warning/10" },
+    { name: "Biology", questions: 4, color: "text-success", bg: "bg-success/10" },
+    { name: "Computer Science", questions: 4, color: "text-info", bg: "bg-info/10" },
   ]
 
   return (

@@ -65,7 +65,7 @@ export function Dashboard({ onNavigate, userName, accountType }: DashboardProps)
     <div className="flex flex-col gap-4 lg:gap-6">
       {/* Header */}
       <div className="flex flex-col gap-1">
-        <h1 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl lg:text-3xl text-balance font-[family-name:var(--font-display)]">
+        <h1 className="text-xl font-bold tracking-tight text-gradient sm:text-2xl lg:text-3xl text-balance font-[family-name:var(--font-display)]">
           {accountType === "parent"
             ? `Monitoring Dashboard`
             : `Welcome back, ${userName.split(" ")[0]}`}

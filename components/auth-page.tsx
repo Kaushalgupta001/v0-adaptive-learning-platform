@@ -124,7 +124,7 @@ export function AuthPage({ onLogin }: AuthPageProps) {
                   className="rounded-xl object-cover"
                 />
               </div>
-              <h1 className="font-display text-3xl font-bold tracking-tight text-foreground">
+              <h1 className="font-display text-3xl font-bold tracking-tight text-gradient">
                 GrowthBuddy
               </h1>
               <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
@@ -186,7 +186,7 @@ export function AuthPage({ onLogin }: AuthPageProps) {
                 <div className="flex size-14 items-center justify-center overflow-hidden rounded-xl border border-primary/20 bg-secondary shadow-sm dark:bg-primary/10">
                   <Image src="/images/logo.jpg" alt="GrowthBuddy Logo" width={56} height={56} className="rounded-lg object-cover" />
                 </div>
-                <h1 className="mt-3 text-xl font-bold tracking-tight text-foreground">GrowthBuddy</h1>
+                <h1 className="mt-3 text-xl font-bold tracking-tight text-gradient">GrowthBuddy</h1>
                 <p className="text-xs text-muted-foreground">Adaptive Learning Engine</p>
               </div>
 

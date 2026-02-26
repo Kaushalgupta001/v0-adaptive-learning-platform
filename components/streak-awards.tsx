@@ -63,7 +63,7 @@ export function StreakAwards() {
     <div className="flex flex-col gap-4 lg:gap-6">
       {/* Header */}
       <div>
-        <h1 className="text-xl font-bold text-foreground sm:text-2xl lg:text-3xl text-balance font-[family-name:var(--font-display)]">
+        <h1 className="text-xl font-bold text-gradient sm:text-2xl lg:text-3xl text-balance font-[family-name:var(--font-display)]">
           Streak Awards & E-Badges
         </h1>
         <p className="mt-1 text-xs text-muted-foreground leading-relaxed sm:text-sm">
@@ -83,7 +83,7 @@ export function StreakAwards() {
                 </div>
               </div>
               <div>
-                <h2 className="text-xl font-bold text-foreground sm:text-2xl">{currentStreak} Day Streak</h2>
+                <h2 className="text-xl font-bold text-gradient-warm sm:text-2xl">{currentStreak} Day Streak</h2>
                 <p className="text-xs text-muted-foreground sm:text-sm">
                   {unlockedCount} of {awards.length} awards earned
                 </p>

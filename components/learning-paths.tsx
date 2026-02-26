@@ -115,7 +115,7 @@ export function LearningPaths() {
                 <BookOpen className="size-5 text-primary sm:size-6" />
               </div>
               <div className="flex-1">
-                <h1 className="text-base font-bold text-foreground sm:text-xl font-[family-name:var(--font-display)]">
+                <h1 className="text-base font-bold text-gradient sm:text-xl font-[family-name:var(--font-display)]">
                   {currentModule?.title}
                 </h1>
                 <div className="mt-1 flex items-center gap-2">
@@ -274,7 +274,7 @@ export function LearningPaths() {
   return (
     <div className="flex flex-col gap-4 lg:gap-6">
       <div>
-        <h1 className="text-xl font-bold text-foreground sm:text-2xl lg:text-3xl text-balance font-[family-name:var(--font-display)]">
+        <h1 className="text-xl font-bold text-gradient sm:text-2xl lg:text-3xl text-balance font-[family-name:var(--font-display)]">
           Personalized Learning Paths
         </h1>
         <p className="mt-1 text-xs text-muted-foreground leading-relaxed sm:text-sm">

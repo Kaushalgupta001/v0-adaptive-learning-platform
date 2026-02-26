@@ -282,7 +282,7 @@ function QuizMenu({ onStart }: { onStart: (subject: string | null) => void }) {
   return (
     <div className="flex flex-col gap-4 lg:gap-6">
       <div>
-        <h1 className="text-xl font-bold text-foreground sm:text-2xl lg:text-3xl text-balance font-[family-name:var(--font-display)]">
+        <h1 className="text-xl font-bold text-gradient sm:text-2xl lg:text-3xl text-balance font-[family-name:var(--font-display)]">
           Smart Quiz Engine
         </h1>
         <p className="mt-1 text-xs text-muted-foreground leading-relaxed sm:text-sm">
@@ -374,7 +374,7 @@ function QuizResults({
               <Brain className="size-6 text-destructive sm:size-8" />
             )}
           </div>
-          <h2 className="text-2xl font-bold text-foreground sm:text-3xl">{percentage}%</h2>
+          <h2 className="text-2xl font-bold text-gradient sm:text-3xl">{percentage}%</h2>
           <p className="mt-1 text-xs text-muted-foreground sm:text-sm">{correct} of {total} correct</p>
           <p className="mt-1 text-[10px] text-muted-foreground sm:text-xs">Avg time: {avgTime}s</p>
         </div>

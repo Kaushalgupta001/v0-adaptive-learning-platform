@@ -66,7 +66,7 @@ export function SmartNudges({ onMarkRead }: { onMarkRead: () => void }) {
     <div className="flex flex-col gap-4 lg:gap-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-xl font-bold text-foreground sm:text-2xl lg:text-3xl text-balance font-[family-name:var(--font-display)]">Smart Nudges</h1>
+          <h1 className="text-xl font-bold text-gradient sm:text-2xl lg:text-3xl text-balance font-[family-name:var(--font-display)]">Smart Nudges</h1>
           <p className="mt-1 text-xs text-muted-foreground leading-relaxed sm:text-sm">Intelligent notifications with built-in quizzes and action items for each subject.</p>
         </div>
         {unreadCount > 0 && (

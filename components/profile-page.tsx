@@ -68,7 +68,7 @@ export function ProfilePage({ userName, accountType }: ProfilePageProps) {
   return (
     <div className="flex flex-col gap-4 lg:gap-6">
       <div>
-        <h1 className="text-xl font-bold text-foreground sm:text-2xl lg:text-3xl text-balance font-[family-name:var(--font-display)]">
+        <h1 className="text-xl font-bold text-gradient sm:text-2xl lg:text-3xl text-balance font-[family-name:var(--font-display)]">
           Profile
         </h1>
         <p className="mt-1 text-xs text-muted-foreground leading-relaxed sm:text-sm">

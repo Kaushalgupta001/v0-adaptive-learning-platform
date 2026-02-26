@@ -49,7 +49,7 @@ export function PeerAnalytics() {
     <div className="flex flex-col gap-4 lg:gap-6">
       {/* Header */}
       <div>
-        <h1 className="text-xl font-bold text-foreground sm:text-2xl lg:text-3xl text-balance font-[family-name:var(--font-display)]">
+        <h1 className="text-xl font-bold text-gradient sm:text-2xl lg:text-3xl text-balance font-[family-name:var(--font-display)]">
           Peer Analytics & Leaderboard
         </h1>
         <p className="mt-1 text-xs text-muted-foreground leading-relaxed sm:text-sm">
@@ -73,7 +73,7 @@ export function PeerAnalytics() {
                 </div>
               </div>
               <div>
-                <h3 className="text-base font-bold text-foreground sm:text-lg">Your Standing</h3>
+                <h3 className="text-base font-bold text-gradient sm:text-lg">Your Standing</h3>
                 <p className="text-xs text-muted-foreground sm:text-sm">
                   Rank #{you.rank} out of {peerData.length} learners
                 </p>

@@ -80,7 +80,7 @@ export function AppShell({ children, activeTab, onTabChange, unreadNudges, userN
             </div>
             {!collapsed && (
               <div className="flex flex-col">
-                <span className="text-sm font-bold tracking-tight text-foreground font-[family-name:var(--font-display)]">GrowthBuddy</span>
+                <span className="text-sm font-bold tracking-tight text-gradient font-[family-name:var(--font-display)]">GrowthBuddy</span>
                 <span className="text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
                   {accountType === "parent" ? "Parent Mode" : "Adaptive Engine"}
                 </span>
@@ -265,7 +265,7 @@ export function ParentMonitor() {
   return (
     <div className="flex flex-col gap-4 lg:gap-6">
       <div>
-        <h1 className="text-xl font-bold text-foreground sm:text-2xl lg:text-3xl text-balance font-[family-name:var(--font-display)]">Child Progress Monitor</h1>
+        <h1 className="text-xl font-bold text-gradient sm:text-2xl lg:text-3xl text-balance font-[family-name:var(--font-display)]">Child Progress Monitor</h1>
         <p className="mt-1 text-xs text-muted-foreground leading-relaxed sm:text-sm">Track your child's learning journey, identify areas needing attention, and support their growth.</p>
       </div>
 

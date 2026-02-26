@@ -12,6 +12,8 @@ import {
   ArrowRight,
   AlertTriangle,
   BookOpen,
+  Brain,
+  Route,
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -28,7 +30,6 @@ import {
   YAxis,
   CartesianGrid,
   ResponsiveContainer,
-  Tooltip,
   Cell,
 } from "recharts"
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
@@ -50,28 +51,34 @@ const radialData = [{ name: "Mastery", value: overallMastery, fill: COLORS.prima
 
 interface DashboardProps {
   onNavigate: (tab: string) => void
+  userName: string
+  accountType: "student" | "parent"
 }
 
-export function Dashboard({ onNavigate }: DashboardProps) {
+export function Dashboard({ onNavigate, userName, accountType }: DashboardProps) {
   const weakSubjects = subjects.filter((s) => s.mastery < 65)
   const totalQuestions = subjects.reduce((sum, s) => sum + s.totalQuestions, 0)
   const totalCorrect = subjects.reduce((sum, s) => sum + s.correctAnswers, 0)
   const avgAccuracy = Math.round((totalCorrect / totalQuestions) * 100)
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-4 lg:gap-6">
       {/* Header */}
       <div className="flex flex-col gap-1">
-        <h1 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl text-balance">
-          Welcome back, Naman
+        <h1 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl lg:text-3xl text-balance font-[family-name:var(--font-display)]">
+          {accountType === "parent"
+            ? `Monitoring Dashboard`
+            : `Welcome back, ${userName.split(" ")[0]}`}
         </h1>
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          Here{"'"}s your learning performance overview. You{"'"}re making great progress!
+        <p className="text-xs text-muted-foreground leading-relaxed sm:text-sm">
+          {accountType === "parent"
+            ? "Track your child's learning performance and progress"
+            : "Here's your learning performance overview. Keep pushing!"}
         </p>
       </div>
 
       {/* Stats Row */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
         <StatCard
           title="Overall Mastery"
           value={`${overallMastery}%`}
@@ -97,7 +104,7 @@ export function Dashboard({ onNavigate }: DashboardProps) {
           accentColor="text-warning"
         />
         <StatCard
-          title="Avg. Response Time"
+          title="Avg. Response"
           value="42s"
           subtitle="-8s improvement"
           icon={<Clock className="size-4" />}
@@ -107,18 +114,18 @@ export function Dashboard({ onNavigate }: DashboardProps) {
       </div>
 
       {/* Main Grid */}
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-4 lg:grid-cols-3 lg:gap-6">
         {/* Performance Chart */}
-        <Card className="col-span-full lg:col-span-2 border-border bg-card">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-base font-semibold text-card-foreground">
+        <Card className="lg:col-span-2 border-border bg-card">
+          <CardHeader className="flex flex-row items-center justify-between pb-2 px-4 lg:px-6">
+            <CardTitle className="text-sm font-semibold text-card-foreground lg:text-base">
               Performance Trend
             </CardTitle>
-            <Badge variant="outline" className="text-xs border-border text-muted-foreground">
+            <Badge variant="outline" className="text-[10px] border-border text-muted-foreground">
               Last 8 Weeks
             </Badge>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-2 lg:px-6">
             <ChartContainer
               config={{
                 math: { label: "Mathematics", color: COLORS.primary },
@@ -126,7 +133,7 @@ export function Dashboard({ onNavigate }: DashboardProps) {
                 chemistry: { label: "Chemistry", color: COLORS.info },
                 cs: { label: "Computer Science", color: COLORS.warning },
               }}
-              className="h-[280px] w-full"
+              className="h-[200px] w-full sm:h-[240px] lg:h-[280px]"
             >
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={performanceTrend} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
@@ -141,8 +148,8 @@ export function Dashboard({ onNavigate }: DashboardProps) {
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                  <XAxis dataKey="week" tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }} />
-                  <YAxis tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }} domain={[40, 100]} />
+                  <XAxis dataKey="week" tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} />
+                  <YAxis tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} domain={[40, 100]} />
                   <ChartTooltip content={<ChartTooltipContent />} />
                   <Area type="monotone" dataKey="math" stroke={COLORS.primary} fill="url(#gradMath)" strokeWidth={2} />
                   <Area type="monotone" dataKey="physics" stroke={COLORS.danger} fill="url(#gradPhysics)" strokeWidth={2} />
@@ -156,13 +163,13 @@ export function Dashboard({ onNavigate }: DashboardProps) {
 
         {/* Mastery Radial */}
         <Card className="border-border bg-card">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-base font-semibold text-card-foreground">
+          <CardHeader className="pb-2 px-4 lg:px-6">
+            <CardTitle className="text-sm font-semibold text-card-foreground lg:text-base">
               Mastery Overview
             </CardTitle>
           </CardHeader>
-          <CardContent className="flex flex-col items-center gap-4">
-            <div className="relative h-[180px] w-[180px]">
+          <CardContent className="flex flex-col items-center gap-4 px-4 lg:px-6">
+            <div className="relative h-[140px] w-[140px] sm:h-[160px] sm:w-[160px]">
               <ResponsiveContainer width="100%" height="100%">
                 <RadialBarChart
                   cx="50%"
@@ -172,7 +179,7 @@ export function Dashboard({ onNavigate }: DashboardProps) {
                   startAngle={90}
                   endAngle={-270}
                   data={radialData}
-                  barSize={12}
+                  barSize={10}
                 >
                   <RadialBar
                     dataKey="value"
@@ -182,16 +189,20 @@ export function Dashboard({ onNavigate }: DashboardProps) {
                 </RadialBarChart>
               </ResponsiveContainer>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-3xl font-bold text-foreground">{overallMastery}%</span>
-                <span className="text-xs text-muted-foreground">Overall</span>
+                <span className="text-2xl font-bold text-foreground sm:text-3xl">{overallMastery}%</span>
+                <span className="text-[10px] text-muted-foreground">Overall</span>
               </div>
             </div>
             <div className="w-full flex flex-col gap-2">
               {subjects.map((subject) => (
-                <div key={subject.id} className="flex items-center gap-3">
-                  <span className="w-24 truncate text-xs text-muted-foreground">{subject.name}</span>
+                <div key={subject.id} className="flex items-center gap-2 sm:gap-3">
+                  <span className="w-16 truncate text-[10px] text-muted-foreground sm:w-24 sm:text-xs">
+                    {subject.name}
+                  </span>
                   <Progress value={subject.mastery} className="h-1.5 flex-1" />
-                  <span className="w-8 text-right text-xs font-medium text-foreground">{subject.mastery}%</span>
+                  <span className="w-8 text-right text-[10px] font-medium text-foreground sm:text-xs">
+                    {subject.mastery}%
+                  </span>
                 </div>
               ))}
             </div>
@@ -199,12 +210,12 @@ export function Dashboard({ onNavigate }: DashboardProps) {
         </Card>
       </div>
 
-      {/* Weakness Detection + Study Time */}
-      <div className="grid gap-6 lg:grid-cols-2">
+      {/* Weakness + Study Time */}
+      <div className="grid gap-4 lg:grid-cols-2 lg:gap-6">
         {/* Weakness Detection */}
         <Card className="border-border bg-card">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="flex items-center gap-2 text-base font-semibold text-card-foreground">
+          <CardHeader className="flex flex-row items-center justify-between pb-2 px-4 lg:px-6">
+            <CardTitle className="flex items-center gap-2 text-sm font-semibold text-card-foreground lg:text-base">
               <AlertTriangle className="size-4 text-warning" />
               Weakness Detection
             </CardTitle>
@@ -214,50 +225,44 @@ export function Dashboard({ onNavigate }: DashboardProps) {
               className="text-xs text-primary hover:text-primary hover:bg-primary/10"
               onClick={() => onNavigate("quiz")}
             >
-              Practice Now <ArrowRight className="ml-1 size-3" />
+              Practice <ArrowRight className="ml-1 size-3" />
             </Button>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-4 lg:px-6">
             <div className="flex flex-col gap-3">
-              {weakSubjects.length > 0 ? (
-                weakSubjects.map((subject) => (
-                  <div key={subject.id} className="rounded-lg border border-border bg-secondary/30 p-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium text-foreground">{subject.name}</span>
-                      <Badge
-                        variant="outline"
-                        className={
-                          subject.trend === "down"
-                            ? "border-destructive/30 text-destructive"
-                            : "border-warning/30 text-warning"
-                        }
-                      >
-                        {subject.trend === "down" ? (
-                          <TrendingDown className="mr-1 size-3" />
-                        ) : (
-                          <Minus className="mr-1 size-3" />
-                        )}
-                        {subject.mastery}%
-                      </Badge>
-                    </div>
-                    <div className="mt-2 flex flex-wrap gap-1">
-                      {subject.weakTopics.map((topic) => (
-                        <Badge
-                          key={topic}
-                          variant="secondary"
-                          className="text-[10px] bg-destructive/10 text-destructive border-0"
-                        >
-                          {topic}
-                        </Badge>
-                      ))}
-                    </div>
+              {weakSubjects.map((subject) => (
+                <div key={subject.id} className="rounded-lg border border-border bg-secondary/30 p-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-foreground">{subject.name}</span>
+                    <Badge
+                      variant="outline"
+                      className={
+                        subject.trend === "down"
+                          ? "border-destructive/30 text-destructive"
+                          : "border-warning/30 text-warning"
+                      }
+                    >
+                      {subject.trend === "down" ? (
+                        <TrendingDown className="mr-1 size-3" />
+                      ) : (
+                        <Minus className="mr-1 size-3" />
+                      )}
+                      {subject.mastery}%
+                    </Badge>
                   </div>
-                ))
-              ) : (
-                <div className="py-8 text-center text-sm text-muted-foreground">
-                  Great job! No major weaknesses detected.
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    {subject.weakTopics.map((topic) => (
+                      <Badge
+                        key={topic}
+                        variant="secondary"
+                        className="text-[10px] bg-destructive/10 text-destructive border-0"
+                      >
+                        {topic}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
-              )}
+              ))}
               {subjects
                 .filter((s) => s.mastery >= 65 && s.mastery < 80)
                 .slice(0, 1)
@@ -287,10 +292,10 @@ export function Dashboard({ onNavigate }: DashboardProps) {
           </CardContent>
         </Card>
 
-        {/* Study Time Chart */}
+        {/* Study Time */}
         <Card className="border-border bg-card">
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="flex items-center gap-2 text-base font-semibold text-card-foreground">
+          <CardHeader className="flex flex-row items-center justify-between pb-2 px-4 lg:px-6">
+            <CardTitle className="flex items-center gap-2 text-sm font-semibold text-card-foreground lg:text-base">
               <BookOpen className="size-4 text-info" />
               Weekly Study Time
             </CardTitle>
@@ -303,21 +308,20 @@ export function Dashboard({ onNavigate }: DashboardProps) {
               Optimize <ArrowRight className="ml-1 size-3" />
             </Button>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-2 lg:px-6">
             <ChartContainer
               config={{
                 hours: { label: "Hours", color: COLORS.primary },
-                efficiency: { label: "Efficiency", color: COLORS.info },
               }}
-              className="h-[220px] w-full"
+              className="h-[180px] w-full sm:h-[220px]"
             >
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={studySessions} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                  <XAxis dataKey="day" tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }} />
-                  <YAxis tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }} />
+                  <XAxis dataKey="day" tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} />
+                  <YAxis tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }} />
                   <ChartTooltip content={<ChartTooltipContent />} />
-                  <Bar dataKey="hours" radius={[6, 6, 0, 0]} maxBarSize={32}>
+                  <Bar dataKey="hours" radius={[6, 6, 0, 0]} maxBarSize={28}>
                     {studySessions.map((entry, index) => (
                       <Cell
                         key={`cell-${index}`}
@@ -329,10 +333,10 @@ export function Dashboard({ onNavigate }: DashboardProps) {
                 </BarChart>
               </ResponsiveContainer>
             </ChartContainer>
-            <div className="mt-3 flex items-center justify-center gap-4 text-xs text-muted-foreground">
+            <div className="mt-3 flex flex-wrap items-center justify-center gap-3 text-[10px] text-muted-foreground sm:text-xs sm:gap-4">
               <span className="flex items-center gap-1">
                 <span className="size-2 rounded-full" style={{ background: COLORS.primary }} />
-                {"Efficiency >= 80%"}
+                {"80%+"}
               </span>
               <span className="flex items-center gap-1">
                 <span className="size-2 rounded-full" style={{ background: COLORS.warning }} />
@@ -348,32 +352,32 @@ export function Dashboard({ onNavigate }: DashboardProps) {
       </div>
 
       {/* Quick Actions */}
-      <div className="grid gap-3 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         <Button
           onClick={() => onNavigate("quiz")}
-          className="h-auto flex-col gap-2 bg-primary/10 py-5 text-primary hover:bg-primary/20 border border-primary/20"
+          className="h-auto flex-col gap-2 bg-primary/10 py-4 text-primary hover:bg-primary/20 border border-primary/20 sm:py-5"
           variant="ghost"
         >
-          <Brain className="size-6" />
-          <span className="text-sm font-semibold">Start Smart Quiz</span>
+          <Brain className="size-5 sm:size-6" />
+          <span className="text-xs font-semibold sm:text-sm">Start Smart Quiz</span>
           <span className="text-[10px] text-primary/70">Targets your weak spots</span>
         </Button>
         <Button
           onClick={() => onNavigate("paths")}
-          className="h-auto flex-col gap-2 bg-info/10 py-5 text-info hover:bg-info/20 border border-info/20"
+          className="h-auto flex-col gap-2 bg-info/10 py-4 text-info hover:bg-info/20 border border-info/20 sm:py-5"
           variant="ghost"
         >
-          <Route className="size-6" />
-          <span className="text-sm font-semibold">Continue Path</span>
+          <Route className="size-5 sm:size-6" />
+          <span className="text-xs font-semibold sm:text-sm">Continue Path</span>
           <span className="text-[10px] text-info/70">3 paths in progress</span>
         </Button>
         <Button
           onClick={() => onNavigate("analytics")}
-          className="h-auto flex-col gap-2 bg-warning/10 py-5 text-warning hover:bg-warning/20 border border-warning/20"
+          className="h-auto flex-col gap-2 bg-warning/10 py-4 text-warning hover:bg-warning/20 border border-warning/20 sm:py-5"
           variant="ghost"
         >
-          <Trophy className="size-6" />
-          <span className="text-sm font-semibold">View Leaderboard</span>
+          <Trophy className="size-5 sm:size-6" />
+          <span className="text-xs font-semibold sm:text-sm">View Leaderboard</span>
           <span className="text-[10px] text-warning/70">You{"'"}re ranked #4</span>
         </Button>
       </div>
@@ -398,26 +402,23 @@ function StatCard({
 }) {
   return (
     <Card className="border-border bg-card group hover:border-primary/30 transition-all duration-300">
-      <CardContent className="p-4">
+      <CardContent className="p-3 sm:p-4">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-medium text-muted-foreground">{title}</span>
-          <div className={`flex size-8 items-center justify-center rounded-lg bg-secondary ${accentColor}`}>
+          <span className="text-[10px] font-medium text-muted-foreground sm:text-xs">{title}</span>
+          <div className={`hidden size-8 items-center justify-center rounded-lg bg-secondary sm:flex ${accentColor}`}>
             {icon}
           </div>
         </div>
-        <div className="mt-2">
-          <span className="text-2xl font-bold text-foreground">{value}</span>
+        <div className="mt-1 sm:mt-2">
+          <span className="text-lg font-bold text-foreground sm:text-2xl">{value}</span>
         </div>
-        <div className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
+        <div className="mt-1 flex items-center gap-1 text-[10px] text-muted-foreground sm:text-xs">
           {trend === "up" && <TrendingUp className="size-3 text-primary" />}
           {trend === "down" && <TrendingDown className="size-3 text-destructive" />}
           {trend === "stable" && <Minus className="size-3 text-warning" />}
-          {subtitle}
+          <span className="truncate">{subtitle}</span>
         </div>
       </CardContent>
     </Card>
   )
 }
-
-// Re-export icons used in quick actions
-import { Brain, Route } from "lucide-react"

@@ -333,7 +333,7 @@ export function Dashboard({ onNavigate, userName, accountType }: DashboardProps)
                 </BarChart>
               </ResponsiveContainer>
             </ChartContainer>
-            <div className="mt-3 flex flex-wrap items-center justify-center gap-3 text-[10px] text-muted-foreground sm:text-xs sm:gap-4">
+            <div className="mt-3 flex items-center justify-center gap-3 text-[10px] text-muted-foreground sm:text-xs sm:gap-4">
               <span className="flex items-center gap-1">
                 <span className="size-2 rounded-full" style={{ background: COLORS.primary }} />
                 {"80%+"}
@@ -405,7 +405,7 @@ function StatCard({
       <CardContent className="p-3 sm:p-4">
         <div className="flex items-center justify-between">
           <span className="text-[10px] font-medium text-muted-foreground sm:text-xs">{title}</span>
-          <div className={`hidden size-8 items-center justify-center rounded-lg bg-secondary sm:flex ${accentColor}`}>
+          <div className={`flex size-7 items-center justify-center rounded-lg bg-secondary sm:size-8 ${accentColor}`}>
             {icon}
           </div>
         </div>

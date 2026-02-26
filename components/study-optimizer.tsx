@@ -159,7 +159,13 @@ export function StudyOptimizer() {
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex-1">
                       <div className="flex items-center gap-1.5">
-                        <Badge variant="secondary" className={cn("text-[9px] border-0 sm:text-[10px]", typeColors[mod.type], `bg-current/10`)}>
+                        <Badge variant="secondary" className={cn(
+                          "text-[9px] border-0 sm:text-[10px]",
+                          mod.type === "focus" ? "bg-info/10 text-info" :
+                          mod.type === "review" ? "bg-warning/10 text-warning" :
+                          mod.type === "practice" ? "bg-primary/10 text-primary" :
+                          "bg-chart-4/10 text-chart-4"
+                        )}>
                           {mod.type}
                         </Badge>
                         <Badge variant="secondary" className="text-[9px] bg-secondary text-secondary-foreground sm:text-[10px]">{mod.duration}m</Badge>

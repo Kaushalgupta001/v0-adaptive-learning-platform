@@ -283,7 +283,7 @@ export function LearningPaths() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         {[
           { icon: BookOpen, color: "text-primary", bg: "bg-primary/10", value: paths.length, label: "Active Paths" },
           { icon: GraduationCap, color: "text-info", bg: "bg-info/10", value: completedModules, label: "Completed" },

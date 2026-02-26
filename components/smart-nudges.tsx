@@ -77,7 +77,7 @@ export function SmartNudges({ onMarkRead }: { onMarkRead: () => void }) {
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap gap-1.5 sm:gap-2">
+      <div className="-mx-4 flex gap-1.5 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:gap-2 sm:overflow-visible sm:px-0 sm:pb-0">
         {[
           { id: "all", label: "All" }, { id: "unread", label: `Unread (${unreadCount})` },
           { id: "warning", label: "Warnings" }, { id: "milestone", label: "Milestones" },
@@ -90,7 +90,7 @@ export function SmartNudges({ onMarkRead }: { onMarkRead: () => void }) {
             size="sm"
             onClick={() => setFilter(f.id)}
             className={cn(
-              "h-7 text-[10px] sm:h-8 sm:text-xs",
+              "h-7 shrink-0 text-[10px] sm:h-8 sm:text-xs",
               filter === f.id ? "bg-primary text-primary-foreground hover:bg-primary/90" : "border-border text-muted-foreground hover:bg-accent hover:text-foreground"
             )}
           >

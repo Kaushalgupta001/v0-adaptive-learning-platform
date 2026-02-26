@@ -111,7 +111,7 @@ export function PeerAnalytics() {
           </CardHeader>
           <CardContent className="px-4 sm:px-6">
             {/* Top 3 Podium */}
-            <div className="mb-4 flex items-end justify-center gap-2 sm:mb-6 sm:gap-4">
+            <div className="mb-4 flex items-end justify-center gap-3 sm:mb-6 sm:gap-4">
               {/* 2nd Place */}
               <div className="flex flex-col items-center">
                 <Avatar className="size-9 border-2 sm:size-11" style={{ borderColor: COLORS.silver }}>

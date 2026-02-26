@@ -76,9 +76,9 @@ export function ProfilePage({ userName, accountType }: ProfilePageProps) {
         </p>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-3 lg:gap-6">
+      <div className="grid gap-4 md:grid-cols-3 md:gap-6">
         {/* Profile Card */}
-        <Card className="lg:col-span-1 border-border bg-card">
+        <Card className="md:col-span-1 border-border bg-card">
           <CardContent className="flex flex-col items-center p-6 text-center">
             {/* Avatar */}
             <div className="relative">
@@ -124,7 +124,7 @@ export function ProfilePage({ userName, accountType }: ProfilePageProps) {
         </Card>
 
         {/* Details */}
-        <Card className="lg:col-span-2 border-border bg-card">
+        <Card className="md:col-span-2 border-border bg-card">
           <CardHeader className="flex flex-row items-center justify-between px-4 sm:px-6">
             <CardTitle className="text-sm font-semibold text-card-foreground sm:text-base">Personal Information</CardTitle>
             {!isEditing ? (

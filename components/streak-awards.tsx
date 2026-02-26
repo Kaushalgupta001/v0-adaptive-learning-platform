@@ -109,28 +109,30 @@ export function StreakAwards() {
       </Card>
 
       {/* Streak Timeline */}
-      <div className="flex items-center justify-between rounded-xl border border-border bg-card p-3 sm:p-4">
-        <div className="flex flex-1 items-center">
+      <div className="overflow-x-auto rounded-xl border border-border bg-card p-3 sm:p-4">
+        <div className="flex min-w-[400px] items-center gap-0.5 sm:min-w-0 sm:gap-0">
           {Array.from({ length: 30 }, (_, i) => i + 1).map((day) => (
-            <div key={day} className="flex-1">
+            <div key={day} className="flex-1" title={`Day ${day}${day % 3 === 0 ? " - Award Day" : ""}`}>
               <div
                 className={cn(
-                  "mx-auto h-2 rounded-full sm:h-3",
+                  "mx-auto h-3 min-w-[8px] rounded-full sm:h-3.5",
                   day <= currentStreak
                     ? day % 3 === 0
                       ? "bg-primary"
                       : "bg-primary/50"
                     : "bg-secondary"
                 )}
-                title={`Day ${day}${day % 3 === 0 ? " - Award Day" : ""}`}
               />
+              {day % 3 === 0 && (
+                <p className="mt-1 text-center text-[7px] text-muted-foreground sm:text-[8px]">{day}</p>
+              )}
             </div>
           ))}
         </div>
       </div>
 
       {/* Awards Grid */}
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {awards.map((award) => {
           const tier = tierColors[award.tier]
           const Icon = award.icon

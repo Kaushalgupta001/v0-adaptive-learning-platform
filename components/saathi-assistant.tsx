@@ -139,7 +139,7 @@ export function SaathiAssistant() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-16 right-4 z-50 flex h-[70vh] w-[calc(100vw-2rem)] max-h-[560px] max-w-[380px] flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl sm:bottom-20 sm:right-6">
+        <div className="fixed bottom-16 right-2 left-2 z-50 flex h-[65vh] max-h-[520px] flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl sm:bottom-20 sm:left-auto sm:right-6 sm:w-[380px]">
           {/* Header */}
           <div className="flex items-center gap-3 border-b border-border bg-primary/5 px-4 py-3">
             <SaathiRobot size="sm" />

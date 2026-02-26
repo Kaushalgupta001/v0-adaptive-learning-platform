@@ -4,7 +4,7 @@ import * as React from "react"
 import {
   LayoutDashboard, Brain, Route, Trophy, Bell, Clock, Zap, ChevronRight,
   Search, User, Settings, LogOut, Moon, Sun, Phone, Heart, ShieldCheck,
-  Menu, Award, X, UserCircle, MessageCircle, BarChart3, BookOpen, AlertTriangle,
+  Menu, Award, X, MessageCircle, BarChart3, BookOpen, AlertTriangle,
 } from "lucide-react"
 import { useTheme } from "next-themes"
 import { cn } from "@/lib/utils"
@@ -42,7 +42,6 @@ const studentNavItems = [
   { id: "streaks", label: "Streak Awards", icon: Award },
   { id: "nudges", label: "Smart Nudges", icon: Bell },
   { id: "optimizer", label: "Study Optimizer", icon: Clock },
-  { id: "profile", label: "My Profile", icon: UserCircle },
 ]
 
 const parentNavItems = [
@@ -50,7 +49,6 @@ const parentNavItems = [
   { id: "parent-monitor", label: "Child Monitor", icon: ShieldCheck },
   { id: "analytics", label: "Leaderboard", icon: Trophy },
   { id: "nudges", label: "Alerts", icon: Bell },
-  { id: "profile", label: "Profile", icon: UserCircle },
 ]
 
 export function AppShell({ children, activeTab, onTabChange, unreadNudges, userName, accountType, streak, onLogout }: AppShellProps) {

@@ -1,12 +1,13 @@
 "use client"
 
 import * as React from "react"
-import { MessageCircle, Send, X, Bot, User, ChevronDown, Sparkles, HelpCircle } from "lucide-react"
+import { Send, User, ChevronDown, Sparkles, HelpCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 import { saathiFAQs } from "@/lib/data"
+import { SaathiRobot } from "@/components/saathi-robot"
 
 interface Message {
   id: string
@@ -129,11 +130,11 @@ export function SaathiAssistant() {
           "fixed bottom-4 right-4 z-50 flex items-center justify-center rounded-full shadow-lg transition-all duration-300 sm:bottom-6 sm:right-6",
           isOpen
             ? "size-10 bg-card border border-border text-muted-foreground hover:text-foreground sm:size-12"
-            : "size-12 bg-primary text-primary-foreground hover:bg-primary/90 sm:size-14"
+            : "size-14 bg-primary/10 border-2 border-primary/40 hover:border-primary hover:bg-primary/20 sm:size-16"
         )}
         aria-label={isOpen ? "Close SAATHI" : "Open SAATHI Assistant"}
       >
-        {isOpen ? <ChevronDown className="size-5" /> : <MessageCircle className="size-5 sm:size-6" />}
+        {isOpen ? <ChevronDown className="size-5" /> : <SaathiRobot size="sm" animate />}
       </button>
 
       {/* Chat Window */}
@@ -141,9 +142,7 @@ export function SaathiAssistant() {
         <div className="fixed bottom-16 right-4 z-50 flex h-[70vh] w-[calc(100vw-2rem)] max-h-[560px] max-w-[380px] flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl sm:bottom-20 sm:right-6">
           {/* Header */}
           <div className="flex items-center gap-3 border-b border-border bg-primary/5 px-4 py-3">
-            <div className="flex size-9 items-center justify-center rounded-full bg-primary/10">
-              <Bot className="size-5 text-primary" />
-            </div>
+            <SaathiRobot size="sm" />
             <div className="flex-1">
               <h3 className="text-sm font-bold text-foreground">SAATHI</h3>
               <p className="text-[10px] text-muted-foreground">Your Learning Assistant</p>
@@ -158,12 +157,13 @@ export function SaathiAssistant() {
             <div className="flex flex-col gap-3">
               {messages.map((msg) => (
                 <div key={msg.id} className={cn("flex gap-2", msg.role === "user" ? "flex-row-reverse" : "flex-row")}>
-                  <div className={cn(
-                    "flex size-7 shrink-0 items-center justify-center rounded-full",
-                    msg.role === "user" ? "bg-info/10" : "bg-primary/10"
-                  )}>
-                    {msg.role === "user" ? <User className="size-3.5 text-info" /> : <Bot className="size-3.5 text-primary" />}
-                  </div>
+                  {msg.role === "user" ? (
+                    <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-info/10">
+                      <User className="size-3.5 text-info" />
+                    </div>
+                  ) : (
+                    <SaathiRobot size="sm" className="shrink-0 scale-75" />
+                  )}
                   <div className={cn(
                     "max-w-[85%] rounded-2xl px-3 py-2 sm:px-4 sm:py-2.5",
                     msg.role === "user"
@@ -179,9 +179,7 @@ export function SaathiAssistant() {
               ))}
               {isTyping && (
                 <div className="flex gap-2">
-                  <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary/10">
-                    <Bot className="size-3.5 text-primary" />
-                  </div>
+                  <SaathiRobot size="sm" className="shrink-0 scale-75" />
                   <div className="rounded-2xl rounded-tl-sm bg-secondary px-4 py-3">
                     <div className="flex gap-1">
                       <span className="size-1.5 animate-bounce rounded-full bg-muted-foreground [animation-delay:0ms]" />

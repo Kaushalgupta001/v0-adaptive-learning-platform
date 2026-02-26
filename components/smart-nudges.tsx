@@ -11,9 +11,8 @@ import {
   CheckCircle2,
   X,
   ArrowRight,
-  Filter,
 } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -46,20 +45,22 @@ const nudgeConfig = {
   },
   encouragement: {
     icon: Heart,
-    color: "text-primary",
-    bg: "bg-primary/10",
-    border: "border-primary/20",
+    color: "text-chart-4",
+    bg: "bg-chart-4/10",
+    border: "border-chart-4/20",
   },
 }
 
 export function SmartNudges({ onMarkRead }: { onMarkRead: () => void }) {
   const [nudgesList, setNudgesList] = React.useState<Nudge[]>(initialNudges)
   const [filter, setFilter] = React.useState<string>("all")
+  const [actionedIds, setActionedIds] = React.useState<Set<string>>(new Set())
 
   const markAsRead = (id: string) => {
     setNudgesList((prev) =>
       prev.map((n) => (n.id === id ? { ...n, read: true } : n))
     )
+    setActionedIds((prev) => new Set(prev).add(id))
     onMarkRead()
   }
 
@@ -82,16 +83,15 @@ export function SmartNudges({ onMarkRead }: { onMarkRead: () => void }) {
   const unreadCount = nudgesList.filter((n) => !n.read).length
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-4 lg:gap-6">
       {/* Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-foreground md:text-3xl text-balance">
+          <h1 className="text-xl font-bold text-foreground sm:text-2xl lg:text-3xl text-balance font-[family-name:var(--font-display)]">
             Smart Nudges
           </h1>
-          <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
-            Intelligent notifications that help you stay on track and improve
-            your learning outcomes.
+          <p className="mt-1 text-xs text-muted-foreground leading-relaxed sm:text-sm">
+            Intelligent notifications to keep you on track and improve learning outcomes.
           </p>
         </div>
         {unreadCount > 0 && (
@@ -101,14 +101,14 @@ export function SmartNudges({ onMarkRead }: { onMarkRead: () => void }) {
             onClick={markAllRead}
             className="border-border text-foreground hover:bg-accent w-fit"
           >
-            <CheckCircle2 className="mr-2 size-4" />
+            <CheckCircle2 className="mr-1.5 size-3.5" />
             Mark all read ({unreadCount})
           </Button>
         )}
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-1.5 sm:gap-2">
         {[
           { id: "all", label: "All" },
           { id: "unread", label: `Unread (${unreadCount})` },
@@ -124,7 +124,7 @@ export function SmartNudges({ onMarkRead }: { onMarkRead: () => void }) {
             size="sm"
             onClick={() => setFilter(f.id)}
             className={cn(
-              "h-8 text-xs",
+              "h-7 text-[10px] sm:h-8 sm:text-xs",
               filter === f.id
                 ? "bg-primary text-primary-foreground hover:bg-primary/90"
                 : "border-border text-muted-foreground hover:bg-accent hover:text-foreground"
@@ -136,46 +136,53 @@ export function SmartNudges({ onMarkRead }: { onMarkRead: () => void }) {
       </div>
 
       {/* Nudge Cards */}
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2 sm:gap-3">
         {filtered.length === 0 ? (
           <Card className="border-border bg-card">
             <CardContent className="flex flex-col items-center justify-center py-12">
-              <Bell className="size-12 text-muted-foreground/30" />
-              <p className="mt-4 text-sm text-muted-foreground">No notifications to show</p>
+              <Bell className="size-10 text-muted-foreground/30 sm:size-12" />
+              <p className="mt-3 text-xs text-muted-foreground sm:mt-4 sm:text-sm">No notifications to show</p>
             </CardContent>
           </Card>
         ) : (
           filtered.map((nudge) => {
             const config = nudgeConfig[nudge.type]
             const Icon = config.icon
+            const actioned = actionedIds.has(nudge.id)
             return (
               <Card
                 key={nudge.id}
                 className={cn(
                   "border-border bg-card transition-all duration-300 hover:border-primary/20",
-                  !nudge.read && `${config.border} ${config.bg}`
+                  !nudge.read && `${config.border} ${config.bg}`,
+                  actioned && "border-primary/20 bg-primary/5"
                 )}
               >
-                <CardContent className="p-4">
-                  <div className="flex items-start gap-4">
+                <CardContent className="p-3 sm:p-4">
+                  <div className="flex items-start gap-3 sm:gap-4">
                     <div
                       className={cn(
-                        "mt-0.5 flex size-10 shrink-0 items-center justify-center rounded-xl",
+                        "mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-lg sm:size-10 sm:rounded-xl",
                         config.bg
                       )}
                     >
-                      <Icon className={cn("size-5", config.color)} />
+                      <Icon className={cn("size-4 sm:size-5", config.color)} />
                     </div>
-                    <div className="flex-1 min-w-0">
+                    <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
-                        <h3 className="text-sm font-semibold text-foreground">{nudge.title}</h3>
+                        <h3 className="text-xs font-semibold text-foreground sm:text-sm">{nudge.title}</h3>
                         {!nudge.read && (
-                          <span className="size-2 rounded-full bg-primary" />
+                          <span className="size-1.5 shrink-0 rounded-full bg-primary sm:size-2" />
+                        )}
+                        {actioned && (
+                          <Badge variant="secondary" className="text-[9px] bg-primary/10 text-primary border-0 sm:text-[10px]">
+                            Actioned
+                          </Badge>
                         )}
                         <Badge
                           variant="secondary"
                           className={cn(
-                            "ml-auto text-[10px] shrink-0",
+                            "ml-auto text-[9px] shrink-0 sm:text-[10px]",
                             nudge.priority === "high"
                               ? "bg-destructive/10 text-destructive"
                               : nudge.priority === "medium"
@@ -186,19 +193,19 @@ export function SmartNudges({ onMarkRead }: { onMarkRead: () => void }) {
                           {nudge.priority}
                         </Badge>
                       </div>
-                      <p className="mt-1 text-sm text-muted-foreground leading-relaxed">
+                      <p className="mt-1 text-[11px] text-muted-foreground leading-relaxed sm:text-sm">
                         {nudge.message}
                       </p>
-                      <div className="mt-3 flex items-center gap-2">
+                      <div className="mt-2 flex items-center gap-2 sm:mt-3">
                         <Button
                           size="sm"
-                          className="h-7 bg-primary text-primary-foreground hover:bg-primary/90 text-xs"
+                          className="h-6 px-2 text-[10px] bg-primary text-primary-foreground hover:bg-primary/90 sm:h-7 sm:px-3 sm:text-xs"
                           onClick={() => markAsRead(nudge.id)}
                         >
                           {nudge.action}
                           <ArrowRight className="ml-1 size-3" />
                         </Button>
-                        <span className="text-[10px] text-muted-foreground ml-2">
+                        <span className="text-[9px] text-muted-foreground ml-1 sm:text-[10px]">
                           {nudge.timestamp}
                         </span>
                       </div>
@@ -206,10 +213,10 @@ export function SmartNudges({ onMarkRead }: { onMarkRead: () => void }) {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="size-7 shrink-0 text-muted-foreground hover:text-foreground hover:bg-accent"
+                      className="size-6 shrink-0 text-muted-foreground hover:text-foreground hover:bg-accent sm:size-7"
                       onClick={() => dismiss(nudge.id)}
                     >
-                      <X className="size-3.5" />
+                      <X className="size-3 sm:size-3.5" />
                     </Button>
                   </div>
                 </CardContent>
